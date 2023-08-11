@@ -1,5 +1,5 @@
 <template>
-  <UCard class="mt-5">
+  <UCard class="mt-5 max-w-5xl mx-auto">
     <template #header>
       <div class="text-center">
         <h1
@@ -34,7 +34,7 @@
       </div>
     </template>
 
-    <NotionRenderer :blockMap="blockMap" />
+    <NotionRenderer :blockMap="blockMap" class="max-w-2xl mx-auto" />
 
     <template #footer>
       하위페이지 경로
@@ -51,10 +51,10 @@ import { NotionRenderer, getPageBlocks } from "vue-notion";
 
 const blockMap = ref(null);
 const article = JSON.parse(localStorage.getItem("article"));
-console.log(article, "articlearticlearticlearticle");
+// console.log(article, "articlearticlearticlearticle");
 getPageBlocks(path).then((b) => {
   blockMap.value = b;
-  console.log(b, "ssssssssssss");
+  // console.log(b, "ssssssssssss");
 });
 </script>
 

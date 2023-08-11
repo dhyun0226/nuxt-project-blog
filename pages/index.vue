@@ -64,12 +64,12 @@ let articles = ref({});
 
 getPageTable("Blog-ec018805f467435ab074c1b80c1f6e96").then((b) => {
   articles.value = b;
-  console.log(b);
-  console.log(articles.value, "ddddddddddd");
+  // console.log(b);
+  // console.log(articles.value, "ddddddddddd");
 });
 
 const saveArticle = (article) => {
   localStorage.setItem("article", JSON.stringify(article));
-  console.log(article, "#event");
+  // console.log(article, "#event");
 };
 </script>
