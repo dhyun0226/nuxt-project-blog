@@ -1,9 +1,9 @@
 <template>
-  <header class="border-b top-0 sticky">
+  <header class="border-b top-0 sticky bg-white dark:bg-black">
     <UContainer>
       <nav class="flex items-center justify-between">
         <NuxtLink to="/" class="font-bold text-xl tracking-wide">
-          <span>이동현 BLOG</span>
+          <span>BLOG</span>
         </NuxtLink>
 
         <ul class="flex items-center gap-5 font-semibold">

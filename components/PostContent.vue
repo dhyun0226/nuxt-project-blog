@@ -1,25 +1,18 @@
 <template>
-  PostContent
-</template>
-
-
-<style>
-
-</style>
-
-<template>
-  <NotionRenderer :blockMap="blockMap" fullPage />
+  <main class="post-content">
+    <NotionRenderer :blockMap="blockMap" />
+  </main>
 </template>
 
 <script setup>
-const { $notion } = useNuxtApp();
-
-// use Notion module to get Notion blocks from the API via a Notion pageId
-const { data: blockMap } = useAsyncData("page_nuxt", () =>
-  $notion.getPageBlocks("8c1ab01960b049f6a282dda64a94afc7")
-);
+import { ref } from "vue";
+import { NotionRenderer, getPageBlocks } from "vue-notion";
+const blockMap = ref(null);
+// getPageBlocks("0c2d625d825a480d813e89fa78da1038").then((b) => {
+//   blockMap.value = b;
+// });
 </script>
 
 <style>
-@import "vue-notion/src/styles.css"; /* optional Notion-like styles */
+@import "vue-notion/src/styles.css";
 </style>
