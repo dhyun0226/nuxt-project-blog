@@ -1,17 +1,4 @@
 <template>
-  <!-- <div>
-    <p>Current route: {{ route.path }}</p>
-  </div> -->
-  <!-- <div v-for="(article, index) of articles" :key="index">
-    <NuxtLink to="/0c2d625d825a480d813e89fa78da1038" v-model="articles">
-      {{ index }}
-      {{ article.id }}
-      {{ article.title }}
-      {{ article.category }}
-      {{ article.date }}
-      {{ article.detail }}
-    </NuxtLink>
-  </div> -->
   <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 py-10">
     <li v-for="(article, index) of articles" :key="index">
       <NuxtLink
@@ -43,7 +30,7 @@
         <div class="flex items-center gap-1 pt-2">
           <Date
             :date="article.date"
-            class="text-gray-900 dark:text-gray-100 font-medium"
+            :dayTrue="true"
           />
           <h3 class="text-lg">
             {{ article.weather }}

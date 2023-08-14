@@ -4,7 +4,7 @@
   <UContainer>
     <NuxtPage />
   </UContainer>
-  <TheFooter />
+  <!-- <TheFooter /> -->
 </template>
 
 <script setup>
