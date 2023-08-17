@@ -1,5 +1,5 @@
 <template>
-  <UCard class="mt-5 max-w-5xl mx-auto">
+  <UCard class="my-5 max-w-5xl mx-auto">
     <template #header>
       <div class="text-center">
         <h1
@@ -28,16 +28,27 @@
         </h3>
       </div>
     </template>
-    <div class="flex items-center space-x-4">
-      <USkeleton class="h-12 w-12" :ui="{ rounded: 'rounded-full' }" />
-      <div class="space-y-2 flex-1">
+    <div v-if="loading === true">
+      <div class="flex items-center justify-between">
+        <USkeleton class="h-8 w-2/4" />
+        <USkeleton class="h-5 w-12" :ui="{ rounded: 'rounded-full' }" />
+      </div>
+      <div class="space-y-2 pt-2">
         <USkeleton class="h-4 w-4/4" />
-        <USkeleton class="h-4 w-2/4" />
-        <USkeleton class="h-4 w-1/4" />
+        <USkeleton class="h-4 w-3/4" />
         <USkeleton class="h-4 w-3/4" />
       </div>
+
+      <div class="flex items-center gap-1 pt-2">
+        <USkeleton class="h-4 w-5/12" />
+        <USkeleton class="h-4 w-6" />
+      </div>
     </div>
-    <NotionRenderer :blockMap="blockMap" class="max-w-2xl mx-auto" />
+    <NotionRenderer
+      v-if="loading === false"
+      :blockMap="blockMap"
+      class="max-w-2xl mx-auto"
+    />
 
     <template #footer>
       하위페이지 경로
@@ -49,16 +60,32 @@
 <script setup>
 const { path } = useRoute();
 
-import { ref } from "vue";
-import { NotionRenderer, getPageBlocks } from "vue-notion";
+import { ref, onMounted } from "vue";
+import { NotionRenderer, getPageBlocks, getPageTable } from "vue-notion";
+import { useArticleStore } from "../../stores/article";
+
+const checkLocalStorage = ref("");
+onMounted(() => {
+  checkLocalStorage.value = JSON.parse(localStorage.getItem("article")) || [];
+});
+const store = useArticleStore();
 
 const blockMap = ref(null);
-const article = JSON.parse(localStorage.getItem("article"));
-// console.log(article, "articlearticlearticlearticle");
-getPageBlocks(path).then((b) => {
-  blockMap.value = b;
-  // console.log(b, "ssssssssssss");
+
+const loading = ref(true);
+
+getPageBlocks(path).then((item) => {
+  console.log(item, "pathpathpathpathpathpathpathpath");
+  blockMap.value = item;
+  loading.value = false;
 });
+
+// const article = JSON.parse(localStorage.getItem("article"));
+console.log(
+  checkLocalStorage,
+  "checkLocalStoragecheckLocalStoragecheckLocalStoragecheckLocalStorage"
+);
+const article = ref(store.article);
 </script>
 
 <style>

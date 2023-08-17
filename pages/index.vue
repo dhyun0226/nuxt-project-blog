@@ -1,5 +1,30 @@
 <template>
-  <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 py-10">
+  <ul
+    v-if="loading === true"
+    class="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 py-10"
+  >
+    <li v-for="(article, index) in 10" :key="index">
+      <div class="flex items-center justify-between">
+        <USkeleton class="h-8 w-2/4" />
+        <USkeleton class="h-5 w-12" :ui="{ rounded: 'rounded-full' }" />
+      </div>
+      <div class="space-y-2 pt-2">
+        <USkeleton class="h-4 w-4/4" />
+        <USkeleton class="h-4 w-3/4" />
+        <USkeleton class="h-4 w-3/4" />
+      </div>
+
+      <div class="flex items-center gap-1 pt-2">
+        <USkeleton class="h-4 w-5/12" />
+        <USkeleton class="h-4 w-6" />
+      </div>
+    </li>
+  </ul>
+
+  <ul
+    v-if="loading === false"
+    class="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 py-10"
+  >
     <li v-for="(article, index) of articles" :key="index">
       <NuxtLink
         :to="article.id"
@@ -28,35 +53,39 @@
         </p>
 
         <div class="flex items-center gap-1 pt-2">
-          <Date
-            :date="article.date"
-            :dayTrue="true"
-          />
+          <Date :date="article.date" :dayTrue="true" />
           <h3 class="text-lg">
             {{ article.weather }}
           </h3>
         </div>
-        <div></div>
       </NuxtLink>
     </li>
   </ul>
 </template>
 
 <script setup>
-import { getPageTable, getPageBlocks } from "vue-notion";
+import { getPageTable } from "vue-notion";
+import { useArticleStore } from "../stores/article";
+import { ref } from "vue";
 
+const store = useArticleStore();
 const route = useRoute();
+
+const loading = ref(true);
 
 let articles = ref({});
 
-getPageTable("Blog-ec018805f467435ab074c1b80c1f6e96").then((b) => {
-  articles.value = b;
-  // console.log(b);
-  // console.log(articles.value, "ddddddddddd");
+// getPageTable("0c2d625d-825a-480d-813e-89fa78da1038").then((b) => {
+//   console.log(b, "0c2d625d-825a-480d-813e-89fa78da1038");
+// });
+
+getPageTable("Blog-ec018805f467435ab074c1b80c1f6e96").then((item) => {
+  articles.value = item;
+  loading.value = false;
 });
 
 const saveArticle = (article) => {
-  localStorage.setItem("article", JSON.stringify(article));
-  // console.log(article, "#event");
+  store.saveArticle(article);
+  // localStorage.setItem("article", JSON.stringify(article));
 };
 </script>

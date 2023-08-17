@@ -2,6 +2,6 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   telemetry: { enabled: false },
-  modules: ['@nuxthq/ui', '@nuxtjs/tailwindcss'],
+  modules: ['@nuxthq/ui', '@nuxtjs/tailwindcss', '@pinia/nuxt'],
   
 });
