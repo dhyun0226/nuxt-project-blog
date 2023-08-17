@@ -60,14 +60,10 @@
 <script setup>
 const { path } = useRoute();
 
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { NotionRenderer, getPageBlocks, getPageTable } from "vue-notion";
 import { useArticleStore } from "../../stores/article";
 
-const checkLocalStorage = ref("");
-onMounted(() => {
-  checkLocalStorage.value = JSON.parse(localStorage.getItem("article")) || [];
-});
 const store = useArticleStore();
 
 const blockMap = ref(null);
@@ -75,16 +71,12 @@ const blockMap = ref(null);
 const loading = ref(true);
 
 getPageBlocks(path).then((item) => {
-  console.log(item, "pathpathpathpathpathpathpathpath");
   blockMap.value = item;
   loading.value = false;
 });
 
 // const article = JSON.parse(localStorage.getItem("article"));
-console.log(
-  checkLocalStorage,
-  "checkLocalStoragecheckLocalStoragecheckLocalStoragecheckLocalStorage"
-);
+
 const article = ref(store.article);
 </script>
 
