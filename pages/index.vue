@@ -69,15 +69,9 @@ import { useArticleStore } from "../stores/article";
 import { ref } from "vue";
 
 const store = useArticleStore();
-const route = useRoute();
-
 const loading = ref(true);
 
-let articles = ref({});
-
-// getPageTable("0c2d625d-825a-480d-813e-89fa78da1038").then((b) => {
-//   console.log(b, "0c2d625d-825a-480d-813e-89fa78da1038");
-// });
+let articles = ref();
 
 getPageTable("Blog-ec018805f467435ab074c1b80c1f6e96").then((item) => {
   articles.value = item;
@@ -86,6 +80,6 @@ getPageTable("Blog-ec018805f467435ab074c1b80c1f6e96").then((item) => {
 
 const saveArticle = (article) => {
   store.saveArticle(article);
-  // localStorage.setItem("article", JSON.stringify(article));
+  localStorage.setItem("article", JSON.stringify(article));
 };
 </script>

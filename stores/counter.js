@@ -1,14 +1,14 @@
 import { defineStore } from "pinia";
+import { useLocalStorage } from "@vueuse/core";
 
-export const useCounterStore = defineStore("counter", () => {
+export const useStorageTestStore = defineStore('storageTest', {
+  state: () => ({
+    user: useLocalStorage('pinia/auth/login', 'bob'),
+  }),
 
-  const count = ref(0);
-
-  function increment() {
-    count.value++;
-  }
-
-  const doubleCount = computed(() => count.value * 2);
-
-  return { count, increment, doubleCount };
-});
+  actions: {
+      setUser(user) {
+          this.user = user
+      }
+  },
+})

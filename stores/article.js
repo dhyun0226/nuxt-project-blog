@@ -15,9 +15,5 @@ export const useArticleStore = defineStore("article", () => {
     article.value = item;
   }
 
-  function removeTodoItem(id) {
-    this.todoList.splice(id, 1);
-  }
-
   return { article, saveArticle, saveArticle2 };
 });
