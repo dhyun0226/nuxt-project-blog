@@ -4,19 +4,19 @@
       <ClientOnly>
         <div class="text-center">
           <h1
-            class="text-5xl max-w-md mx-auto font-bold leading-tight tracking-[-0.01em] pb-3"
+            class="text-5xl font-bold leading-tight tracking-[-0.01em] pb-2"
           >
             {{ article.title }}
           </h1>
           <div class="pb-4">
             <UBadge
-              class="dark:font-bold"
-              color="black"
-              size="md"
-              variant="solid"
-              :ui="{ rounded: 'rounded-full' }"
-              >{{ article.category }}</UBadge
-            >
+            class="dark:font-bold"
+            :color="article.categoryColor"
+            size="md"
+            :variant="colorMode.value === 'dark' ? 'soft' : 'solid'"
+            :ui="{ rounded: 'rounded-full' }"
+            >{{ article.category }}</UBadge
+          >
           </div>
           <div class="flex justify-center gap-1 pb-3 text-lg">
             <Date :date="article.date" :dayTrue="true" />
@@ -31,19 +31,11 @@
       </ClientOnly>
     </template>
     <div v-if="loading === true">
-      <div class="flex items-center justify-between">
-        <USkeleton class="h-8 w-2/4" />
-        <USkeleton class="h-5 w-12" :ui="{ rounded: 'rounded-full' }" />
-      </div>
       <div class="space-y-2 pt-2">
         <USkeleton class="h-4 w-4/4" />
+        <USkeleton class="h-4 w-2/4" />
         <USkeleton class="h-4 w-3/4" />
         <USkeleton class="h-4 w-3/4" />
-      </div>
-
-      <div class="flex items-center gap-1 pt-2">
-        <USkeleton class="h-4 w-5/12" />
-        <USkeleton class="h-4 w-6" />
       </div>
     </div>
     <NotionRenderer
@@ -55,6 +47,7 @@
     <template #footer>
       하위페이지 경로
       {{ path }}
+      <img src = "/asset/commentSample.png" />
     </template>
   </UCard>
 </template>
@@ -72,8 +65,9 @@ onMounted(() => {
   if (checkLocalStorage) {
     article.value = JSON.parse(checkLocalStorage);
   }
-  
+
 });
+const colorMode = useColorMode();
 
 const store = useArticleStore();
 
