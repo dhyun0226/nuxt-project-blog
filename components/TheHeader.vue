@@ -15,9 +15,9 @@
               GitHub
             </NuxtLink>
           </li>
-          <li>
+          <!-- <li>
             <NuxtLink to="/guestbook" class="py-3 block"> GuestBook </NuxtLink>
-          </li>
+          </li> -->
           <li>
             <UButton
               :icon="

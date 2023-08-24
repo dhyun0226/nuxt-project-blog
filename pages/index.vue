@@ -28,31 +28,43 @@
       />
 
       <template #panel>
-        <UVerticalNavigation :links="{links, click: filterArticle()}" class="w-full">
-          <template #badge="{ link }">
+        <div class="p-2 gap-2">
+          <UBadge
+            class="dark:font-bold cursor-pointer"
+            color="black"
+            size="xs"
+            :variant="colorMode.value === 'dark' ? 'soft' : 'solid'"
+            :ui="{ rounded: 'rounded-full' }"
+            @click="filterArticle('전체')"
+          >
+            전체
+          </UBadge>
+          <div class="mt-1" v-for="(item, index) of filterItem" :key="index">
             <UBadge
-              class="dark:font-bold"
-              :color="link.categoryColor"
+              class="dark:font-bold cursor-pointer"
+              :color="item.categoryColor"
               size="xs"
               :variant="colorMode.value === 'dark' ? 'soft' : 'solid'"
               :ui="{ rounded: 'rounded-full' }"
+              @click="filterArticle(item)"
             >
-              {{ link.category }}
+              {{ item.category }}
             </UBadge>
-          </template>
-        </UVerticalNavigation>
+          </div>
+        </div>
       </template>
     </UPopover>
   </div>
   <ul
     v-if="loading === false"
-    class="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 py-5"
+    class="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 py-3"
   >
     <li v-for="(article, index) of articles" :key="index">
       <NuxtLink
         :to="article.id"
         class="block hover:no-underline group"
         @click="saveArticle(article)"
+        style="border: 0.2rem solid; border-radius: 0.5rem; padding: 20px"
       >
         <div class="flex items-center justify-between">
           <h3
@@ -60,14 +72,16 @@
           >
             {{ article.title }}
           </h3>
-          <UBadge
-            class="dark:font-bold"
-            :color="article.categoryColor"
-            size="xs"
-            :variant="colorMode.value === 'dark' ? 'soft' : 'solid'"
-            :ui="{ rounded: 'rounded-full' }"
-            >{{ article.category }}</UBadge
-          >
+          <div class="min-w-fit">
+            <UBadge
+              class="dark:font-bold"
+              :color="article.categoryColor"
+              size="xs"
+              :variant="colorMode.value === 'dark' ? 'soft' : 'solid'"
+              :ui="{ rounded: 'rounded-full' }"
+              >{{ article.category }}</UBadge
+            >
+          </div>
         </div>
         <p
           class="line-clamp-3 text-gray-600/90 dark:text-gray-400/90 font-medium"
@@ -100,18 +114,15 @@ let firstArticles = ref();
 let filterItem = ref();
 
 getPageTable("Blog-ec018805f467435ab074c1b80c1f6e96").then((item) => {
-  console.log(item);
+  articles.value = useFilter(item, { show: true });
 
-  articles.value = item.sort((a, b) => new Date(b.date) - new Date(a.date));
+  articles.value = useSortBy(articles.value, "date").reverse();
+
   firstArticles.value = articles.value;
 
-  filterItem.value = item.map((s) => {
-    console.log(s, "sssssssssssssssssssssssssssssssssssssssssssssssss");
-    return { category: s.category, categoryColor: s.categoryColor };
-  });
+  filterItem.value = useUniqBy(articles.value, "category");
 
   loading.value = false;
-  console.log(filterItem, "filterItemfilterItemfilterItemfilterItem");
 });
 
 const saveArticle = (article) => {
@@ -119,33 +130,13 @@ const saveArticle = (article) => {
   localStorage.setItem("article", JSON.stringify(article));
 };
 
-const links = [
-  {
-    category: "전체",
-    categoryColor: "black",
-  },
-  {
-    category: "일상",
-    categoryColor: "green",
-  },
-  {
-    category: "Nuxt",
-    categoryColor: "cyan",
-  },
-  {
-    category: "주식",
-    categoryColor: "red",
-  },
-];
 const filterArticle = (item) => {
-  articles.value = item.filter((param) => param.category == item.category);
-  console.log(
-    item,
-    "itemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitemitem"
-  );
-  console.log(
-    articles.value,
-    "articles.valuearticles.valuearticles.valuearticles.value"
+  if (item == "전체") {
+    articles.value = firstArticles.value;
+    return;
+  }
+  articles.value = firstArticles.value.filter(
+    (x) => x.category == item.category
   );
 };
 </script>

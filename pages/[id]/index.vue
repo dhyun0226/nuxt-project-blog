@@ -3,20 +3,18 @@
     <template #header>
       <ClientOnly>
         <div class="text-center">
-          <h1
-            class="text-5xl font-bold leading-tight tracking-[-0.01em] pb-2"
-          >
+          <h1 class="text-5xl font-bold leading-tight tracking-[-0.01em] pb-2">
             {{ article.title }}
           </h1>
           <div class="pb-4">
             <UBadge
-            class="dark:font-bold"
-            :color="article.categoryColor"
-            size="md"
-            :variant="colorMode.value === 'dark' ? 'soft' : 'solid'"
-            :ui="{ rounded: 'rounded-full' }"
-            >{{ article.category }}</UBadge
-          >
+              class="dark:font-bold"
+              :color="article.categoryColor"
+              size="md"
+              :variant="colorMode.value === 'dark' ? 'soft' : 'solid'"
+              :ui="{ rounded: 'rounded-full' }"
+              >{{ article.category }}</UBadge
+            >
           </div>
           <div class="flex justify-center gap-1 pb-3 text-lg">
             <Date :date="article.date" :dayTrue="true" />
@@ -45,9 +43,8 @@
     />
 
     <template #footer>
-      하위페이지 경로
-      {{ path }}
-      <img src = "/asset/commentSample.png" />
+      <!-- 하위페이지 경로
+      {{ path }} -->
     </template>
   </UCard>
 </template>
@@ -65,7 +62,6 @@ onMounted(() => {
   if (checkLocalStorage) {
     article.value = JSON.parse(checkLocalStorage);
   }
-
 });
 const colorMode = useColorMode();
 
@@ -100,9 +96,8 @@ const article = ref(store.article);
   position: unset;
 } */
 
-/* .notion-image-inset {
-  max-width: 70%;
-  max-height: 70%;
+.notion-image-inset {
+  position: unset;
   margin: auto;
-} */
+}
 </style>
