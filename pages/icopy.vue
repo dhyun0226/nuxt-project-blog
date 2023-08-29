@@ -5,6 +5,15 @@ import { useStorageTestStore } from "../stores/counter";
 
 const storageTestStore = useStorageTestStore();
 
+const { data, error } = useFetch(
+  "http://localhost:8080/hello-world-internationalized",
+  {
+    headers: {
+      "Accept-Language": "nl",
+    },
+  }
+);
+
 // create array with 10 random first names
 const firstNames = [
   "James",
@@ -49,6 +58,7 @@ const items = [
 </script>
 
 <template>
+  <pre>{{ data }}</pre>
   <div class="max-w-[1152px] mx-auto">
     <h1 class="text-xl">{{ storageTestStore.user }}</h1>
     <button
@@ -71,7 +81,7 @@ const items = [
           to="/getting-started"
           class="flex items-end gap-1.5 font-bold text-xl text-gray-900 dark:text-white"
         >
-          <Logo class="w-8 h-8 text-primary-500 dark:text-primary-400" />
+          <!-- <Logo class="w-8 h-8 text-primary-500 dark:text-primary-400" /> -->
 
           <span class="hidden sm:block">NuxtLabs</span
           ><span class="sm:text-primary-500 dark:sm:text-primary-400">UI</span>
@@ -96,61 +106,6 @@ const items = [
         </p>
       </div>
 
-      <div class="flex flex-col items-center">
-        <code>$ npm install @nuxtlabs/ui</code>
-        <code>$ nnpm install -D @nuxthq/ui</code>
-        <code>$ pnpm i -D @nuxthq/ui</code>
-      </div>
-      <div class="flex flex-col items-center">
-        <code>$ npm install @nuxtlabs/ui</code>
-        <code>$ nnpm install -D @nuxthq/ui</code>
-        <code>$ pnpm i -D @nuxthq/ui</code>
-      </div>
-      <div class="flex flex-col items-center">
-        <code>$ npm install @nuxtlabs/ui</code>
-        <code>$ nnpm install -D @nuxthq/ui</code>
-        <code>$ pnpm i -D @nuxthq/ui</code>
-      </div>
-      <div class="flex flex-col items-center">
-        <code>$ npm install @nuxtlabs/ui</code>
-        <code>$ nnpm install -D @nuxthq/ui</code>
-        <code>$ pnpm i -D @nuxthq/ui</code>
-      </div>
-      <div class="flex flex-col items-center">
-        <code>$ npm install @nuxtlabs/ui</code>
-        <code>$ nnpm install -D @nuxthq/ui</code>
-        <code>$ pnpm i -D @nuxthq/ui</code>
-      </div>
-      <div class="flex flex-col items-center">
-        <code>$ npm install @nuxtlabs/ui</code>
-        <code>$ nnpm install -D @nuxthq/ui</code>
-        <code>$ pnpm i -D @nuxthq/ui</code>
-      </div>
-      <div class="flex flex-col items-center">
-        <code>$ npm install @nuxtlabs/ui</code>
-        <code>$ nnpm install -D @nuxthq/ui</code>
-        <code>$ pnpm i -D @nuxthq/ui</code>
-      </div>
-      <div class="flex flex-col items-center">
-        <code>$ npm install @nuxtlabs/ui</code>
-        <code>$ nnpm install -D @nuxthq/ui</code>
-        <code>$ pnpm i -D @nuxthq/ui</code>
-      </div>
-      <div class="flex flex-col items-center">
-        <code>$ npm install @nuxtlabs/ui</code>
-        <code>$ nnpm install -D @nuxthq/ui</code>
-        <code>$ pnpm i -D @nuxthq/ui</code>
-      </div>
-      <div class="flex flex-col items-center">
-        <code>$ npm install @nuxtlabs/ui</code>
-        <code>$ nnpm install -D @nuxthq/ui</code>
-        <code>$ pnpm i -D @nuxthq/ui</code>
-      </div>
-      <div class="flex flex-col items-center">
-        <code>$ npm install @nuxtlabs/ui</code>
-        <code>$ nnpm install -D @nuxthq/ui</code>
-        <code>$ pnpm i -D @nuxthq/ui</code>
-      </div>
       <div class="flex flex-col items-center">
         <code>$ npm install @nuxtlabs/ui</code>
         <code>$ nnpm install -D @nuxthq/ui</code>
