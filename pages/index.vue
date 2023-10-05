@@ -101,7 +101,6 @@
 </template>
 
 <script setup>
-import { getPageTable } from "vue-notion";
 import { useArticleStore } from "../stores/article";
 import { ref } from "vue";
 
@@ -113,7 +112,7 @@ let articles = ref();
 let firstArticles = ref();
 let filterItem = ref();
 
-getPageTable("Blog-ec018805f467435ab074c1b80c1f6e96").then((item) => {
+$notion.getPageTable("Blog-ec018805f467435ab074c1b80c1f6e96").then((item) => {
   articles.value = useFilter(item, { show: true });
 
   articles.value = useSortBy(articles.value, "date").reverse();

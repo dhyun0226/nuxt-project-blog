@@ -64,6 +64,12 @@ onMounted(() => {
   }
   
 });
+
+$notion.getPageBlocks(path).then((item) => {
+  blockMap.value = item;
+  loading.value = false;
+});
+
 const colorMode = useColorMode();
 
 const store = useArticleStore();
