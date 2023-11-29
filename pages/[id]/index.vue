@@ -39,7 +39,7 @@
     <NotionRenderer
       v-if="loading === false"
       :blockMap="blockMap"
-      class="max-w-2xl mx-auto"
+      class="max-w-2xl mx-auto text-gray-900 dark:text-gray-100"
     />
 
     <template #footer>
@@ -96,6 +96,11 @@ const article = ref(store.article);
 
 .notion div input {
   margin-right: 0.5rem;
+}
+
+.notion {
+  color: inherit;
+  caret-color: inherit;
 }
 
 .notion-asset-wrapper div {
