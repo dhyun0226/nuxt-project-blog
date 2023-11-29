@@ -28,7 +28,7 @@
       />
 
       <template #panel>
-        <div class="flex p-2 gap-2">
+        <div class="p-2 gap-2">
           <div>
             <UBadge
               class="dark:font-bold cursor-pointer"
