@@ -65,7 +65,7 @@ onMounted(() => {
   
 });
 
-$notion.getPageBlocks(path).then((item) => {
+getPageBlocks(path).then((item) => {
   blockMap.value = item;
   loading.value = false;
 });
@@ -98,10 +98,10 @@ const article = ref(store.article);
   margin-right: 0.5rem;
 }
 
-/* .notion-asset-wrapper div {
-  padding-bottom: 0%;
-  position: unset;
-} */
+.notion-asset-wrapper div {
+  padding-bottom: 0% !important;
+  position: unset !important;
+}
 
 .notion-image-inset {
   position: unset;

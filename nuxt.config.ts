@@ -9,4 +9,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "nuxt-lodash",
   ],
+  build: {
+    transpile: ["vue-notion"],
+  },
 });
