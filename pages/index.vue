@@ -21,7 +21,7 @@
     </li>
   </ul>
   <div class="mt-3 flex justify-end" v-if="loading === false">
-    <UPopover :popper="{ placement: 'left' }">
+    <UPopover>
       <UButton
         color="white"
         trailing-icon="i-heroicons-bars-3-center-left-20-solid"
@@ -29,7 +29,7 @@
 
       <template #panel>
         <div class="flex p-2 gap-2">
-          <div >
+          <div>
             <UBadge
               class="dark:font-bold cursor-pointer"
               color="black"
