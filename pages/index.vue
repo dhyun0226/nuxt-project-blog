@@ -21,25 +21,27 @@
     </li>
   </ul>
   <div class="mt-3 flex justify-end" v-if="loading === false">
-    <UPopover>
+    <UPopover :popper="{ placement: 'left' }">
       <UButton
         color="white"
         trailing-icon="i-heroicons-bars-3-center-left-20-solid"
       />
 
       <template #panel>
-        <div class="p-2 gap-2">
-          <UBadge
-            class="dark:font-bold cursor-pointer"
-            color="black"
-            size="xs"
-            :variant="colorMode.value === 'dark' ? 'soft' : 'solid'"
-            :ui="{ rounded: 'rounded-full' }"
-            @click="filterArticle('전체')"
-          >
-            전체
-          </UBadge>
-          <div class="mt-1" v-for="(item, index) of filterItem" :key="index">
+        <div class="flex p-2 gap-2">
+          <div >
+            <UBadge
+              class="dark:font-bold cursor-pointer"
+              color="black"
+              size="xs"
+              :variant="colorMode.value === 'dark' ? 'soft' : 'solid'"
+              :ui="{ rounded: 'rounded-full' }"
+              @click="filterArticle('전체')"
+            >
+              전체
+            </UBadge>
+          </div>
+          <div v-for="(item, index) of filterItem" :key="index">
             <UBadge
               class="dark:font-bold cursor-pointer"
               :color="item.categoryColor"
@@ -103,7 +105,7 @@
 <script setup>
 import { useArticleStore } from "../stores/article";
 import { ref } from "vue";
-import { getPageTable } from "vue-notion"
+import { getPageTable } from "vue-notion";
 const colorMode = useColorMode();
 const store = useArticleStore();
 const loading = ref(true);
